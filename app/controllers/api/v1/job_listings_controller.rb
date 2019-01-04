@@ -5,15 +5,35 @@ class Api::V1::JobListingsController < ApplicationController
 
 
   def job_search
-    # byebug
-    
-    url = http://api.adzuna.com/v1/api/jobs/us/search/1?app_id={app_id}&app_key={app_key}
+    url = "http://api.adzuna.com/v1/api/jobs/us/search/1?app_id=#{ENV['APP_ID']}&app_key=#{ENV['APP_KEY']}"
     req = RestClient.get(url)
     resp = JSON.parse(req)
-    byebug
-    real_resp = resp.
-    # resp... [params[:searchform]]
-    render json: real_resp
+    # byebug
+    results = resp["results"]
+
+    results.each do |listing|
+      JobListing.find_or_create_by(
+        job_id: listing["id"],
+        title: listing["title"],
+        location: listing["location"]["area"][1],
+        description: listing["description"],
+        salary: listing["salary_is_predicted"],
+        company: listing["company"]["display_name"],
+        website: listing["redirect_url"]
+      )
+
+      # job_listing = JobListing.new
+      # job_listing.job_id = listing["id"]
+      # job_listing.title = listing["title"]
+      # job_listing.location = listing["location"]["area"][1]
+      # job_listing.description = listing["description"]
+      # job_listing.salary = listing["salary_is_predicted"]
+      # job_listing.company = listing["company"]["display_name"]
+      # job_listing.website = listing["redirect_url"]
+      # job_listing.save
+    end
+
+    render json: results
   end
 
   def index
@@ -56,7 +76,7 @@ class Api::V1::JobListingsController < ApplicationController
   private
 
   def job_listing_params
-    params.require(:title, :description, :job_type, :salary, :location, :experience)
+    params.require(:title, :description, :company, :salary, :location, :website)
   end
 
   def find_job_listing
