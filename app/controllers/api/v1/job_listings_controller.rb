@@ -5,7 +5,7 @@ class Api::V1::JobListingsController < ApplicationController
 
 
   def job_search
-    url = "http://api.adzuna.com/v1/api/jobs/us/search/1?app_id=#{ENV['APP_ID']}&app_key=#{ENV['APP_KEY']}"
+    url = "https://api.adzuna.com:443/v1/api/jobs/us/search/1?app_id=#{ENV['APP_ID']}&app_key=#{ENV['APP_KEY']}&results_per_page=100&title_only=full%20stack%20developer&full_time=1"
     req = RestClient.get(url)
     resp = JSON.parse(req)
     # byebug
@@ -21,16 +21,6 @@ class Api::V1::JobListingsController < ApplicationController
         company: listing["company"]["display_name"],
         website: listing["redirect_url"]
       )
-
-      # job_listing = JobListing.new
-      # job_listing.job_id = listing["id"]
-      # job_listing.title = listing["title"]
-      # job_listing.location = listing["location"]["area"][1]
-      # job_listing.description = listing["description"]
-      # job_listing.salary = listing["salary_is_predicted"]
-      # job_listing.company = listing["company"]["display_name"]
-      # job_listing.website = listing["redirect_url"]
-      # job_listing.save
     end
 
     render json: results
