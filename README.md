@@ -1,25 +1,22 @@
-# README
+Project Title - Job Search 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I created this project as part of my Module 4 requirement as a student at Flatiron School. This is the backend portion of the job search application. The application pull all job search results specifically for developer positions from the Adzuna API.
 
-Things you may want to cover:
+Here is the link to the front end built in React: https://github.com/zhenwu93/jobsearch-client
 
-* Ruby version
+Built With: 
+- Ruby '2.3.3'
+- Rails '~> 5.2.1'
 
-* System dependencies
+Notable Gems: 
+gem 'rack-cors'
+gem 'active_model_serializers'
+gem 'rest-client'
+gem 'dotenv'
 
-* Configuration
 
-* Database creation
+API: Adzuna 
+https://developer.adzuna.com/overview
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# module-4-project-job-search
+How to Use? 
+Simply fork and clone the project. Bundle install all the gems and start the server with rails s. 
