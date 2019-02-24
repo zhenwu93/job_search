@@ -9,10 +9,10 @@ Built With:
 - Rails '~> 5.2.1'
 
 Notable Gems: 
-gem 'rack-cors'
-gem 'active_model_serializers'
-gem 'rest-client'
-gem 'dotenv'
+- gem 'rack-cors'
+- gem 'active_model_serializers'
+- gem 'rest-client'
+- gem 'dotenv'
 
 
 API: Adzuna 
